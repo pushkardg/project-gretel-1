@@ -5,8 +5,43 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * A Pojo which represents the Node in the Graph. Here is an example of a graph and the Node representation of it:
+ * 
+    *                        tweet1, 
+    *                        tweet7                     
+    *          (gretel--------------------------- (data)
+    *             |                                 
+    *             |                                
+    *             | tweet5,                         
+    *             |                                 
+    *             |                                                          
+    *          (rocketship)        
+    *                 
+    * 
+    * GraphNode{
+    *      hashTag: "gretel",
+    *      neighbors: { "data": ["tweet1", "tweet7"] , "rocketship" : ["tweet5"]}
+    * }
+    * 
+    * GraphNode{
+    *      hashTag: "data",
+    *      neighbors: { "gretel": ["tweet1", "tweet7"] }
+    * }
+    * 
+    * GraphNode{
+    *      hashTag: "rocketship",
+    *      neighbors: { "gretel": ["tweet5"] }
+    * }
+    * 
+ * 
+ */
 public class GraphNode {
+
     private String hashTag;
+
+    //Contains a map of the neighbor nodes associated with the current GraphNode, along with the set of tweetIds
+    //associated with the edges. 
     private Map<GraphNode, Set<String>> neighbors;
 
     public GraphNode(String hashTag) {
@@ -50,10 +85,5 @@ public class GraphNode {
 
     public Map<GraphNode, Set<String>> getNeighbors() {
         return neighbors;
-    }
-
-    @Override
-    public String toString() {
-        return "(Node: "+ this.hashTag+ " . Neighbors "+ this.getNeighbors()+")";
     }
 }

@@ -16,6 +16,24 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 class TweetHashTagGraphTest {
+    
+    /**
+     *      Initial Graph Used for test case
+     * 
+     *                        tweet1, 
+     *                        tweet7                        tweet2
+     *          (gretel--------------------------- (data)---------- (privacy)
+     *             |                                  |            /
+     *             |                                  |           /
+     *             | tweet5,                          |tweet2    /
+     *             |                                  |         /tweet2             
+     *             |                                  |        /
+     *             |                                  |       /
+     *          (rocketship)                        (startup)/
+     * 
+     * 
+     *          (cat)
+     */
     @Test
     void testExtractHashTagsInAllTweets() {
 
@@ -46,7 +64,6 @@ class TweetHashTagGraphTest {
         Assert.assertEquals(getTweetsOnEdge(graph, "data", "privacy") ,Set.of("tweet2"));
 
 
-        
         // Verify node - rocketship
         Assert.assertEquals(graph.getHashTagToNodeMap().get("rocketship").getHashTag(), "rocketship");
         Assert.assertEquals(getNeighborHashTags(graph, "rocketship"), Set.of("gretel"));
@@ -105,7 +122,7 @@ class TweetHashTagGraphTest {
     }
 
     /**
-     *      Initial Graph Used for test case
+     *      Initial Graph Used for the test case
      * 
      *                        tweet1, 
      *                        tweet7                        tweet2
@@ -231,6 +248,11 @@ class TweetHashTagGraphTest {
         Assert.assertEquals(graph.getNumberOfEdges(), 0);
         Assert.assertEquals(graph.getNumberOfNodesInGraph(), 0);
     }
+
+
+    //--------------------------
+    // Helper methods used in the test cases. 
+    //--------------------------
 
     private Map<GraphNode, Set<String>> getNeighbors(TweetHashTagGraph graph, String node){
         return graph.getHashTagToNodeMap().get(node).getNeighbors();

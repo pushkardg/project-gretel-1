@@ -16,10 +16,24 @@ import java.util.Optional;
 
 import project.definition.TweetHashTag;
 
+/**
+ * THis class is responsible for reading the tweets.txt file and parsing the json content to extract 
+ * the hashtags from the tweets
+ */
 public class TweetsFileReader {
     final JSONParser parser = new JSONParser();
 
 
+    public boolean checkIfFileExists(String filePath){
+        final File file = new File(filePath);
+        return file.exists();
+    }
+
+    /**
+     * Reads the file tweets file, extracts the tweet hash tags and returns them.
+     * @param filePath
+     * @return
+     */
     public List<TweetHashTag> getHashTagsInTweets(String filePath) {
 
         final List<TweetHashTag> hashTagsList = new ArrayList<>();
@@ -44,6 +58,11 @@ public class TweetsFileReader {
         return hashTagsList;
     }
 
+    /**
+     * Given an individual tweet Json String, this function extracts the tweetId from it
+     * @param tweet
+     * @return
+     */
     protected Optional<String> extractTweetId(String tweet) {
         try {
             JSONObject tweetJson = (JSONObject) parser.parse(tweet);
@@ -56,8 +75,13 @@ public class TweetsFileReader {
         return Optional.empty();
     }
 
+    /**
+     * Given an individual tweet json string, this function extracts the hash tags from it. 
+     * @param tweet
+     * @return
+     */
     protected List<String> extractHashTagsInTweetString(String tweet) {
-        List<String> hashTagsInTweet = new ArrayList<>();
+        final List<String> hashTagsInTweet = new ArrayList<>();
         try {
             JSONObject tweetJson = (JSONObject) parser.parse(tweet);
             if (!tweetJson.containsKey("entities")
