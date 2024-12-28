@@ -55,7 +55,8 @@ class TweetsFileReaderTest {
             new TweetHashTag("tweet3", Arrays.asList("data")),
             new TweetHashTag("tweet4", Arrays.asList("gretel")),
             new TweetHashTag("tweet5", Arrays.asList("rocketship", "gretel")),
-            new TweetHashTag("tweet6", Arrays.asList("cats", "cats", "cats"))
+            new TweetHashTag("tweet6", Arrays.asList("cats", "cats", "cats")),
+            new TweetHashTag("tweet7", Arrays.asList( "gretel", "data") )
         );
 
         Assert.assertEquals(hashTags, expectedHashTags);

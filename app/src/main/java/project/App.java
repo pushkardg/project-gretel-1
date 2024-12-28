@@ -23,33 +23,36 @@ public class App {
     public static void main(String[] args) throws IOException {
         System.out.println("COming to MAIN CLASSS !  " + System.getProperty("user.dir"));
         Engine engine = new Engine();
-        engine.test();
-    }
+        engine.calculateAverage();
 
-    public static void testWithHttpServer() throws IOException {
-        int port = 8081;
-        HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/file/", new MyHandler());
-        server.start();
-        System.out.println("Server started at http://localhost:" + port);
-    }
+        engine.addTweet("{\"id_str\":\"tweet11\",\"entities\":{\"hashtags\":[{\"text\":\"Gretel\"},{\"text\":\"data\"}]}}");
+        System.out.println( "ADded tweet 11");
+        engine.calculateAverage();
+        
+        engine.addTweet("{\"id_str\":\"tweet12\",\"entities\":{\"hashtags\":[{\"text\":\"dogs\"},{\"text\":\"tiger\"}]}}");
+        System.out.println( "ADded tweet 12");
+        engine.calculateAverage();
 
-    static class MyHandler implements HttpHandler {
+        engine.addTweet("{\"id_str\":\"tweet13\",\"entities\":{\"hashtags\":[{\"text\":\"dogs\"},{\"text\":\"tiger\"}]}}");
+        System.out.println( "ADded tweet 13");
+        engine.calculateAverage();
 
-        public void sendResponse(String response, HttpExchange t) throws IOException {
-            t.sendResponseHeaders(200, response.length());
-            OutputStream os = t.getResponseBody();
-            os.write(response.getBytes());
-            os.close();
-        }
+        engine.removeTweet("{\"id_str\":\"tweet13\",\"entities\":{\"hashtags\":[{\"text\":\"dogs\"},{\"text\":\"tiger\"}]}}");
+        System.out.println( "Removed tweet 13");
+        engine.calculateAverage();
 
-        @Override
-        public void handle(HttpExchange t) throws IOException {
-            Engine engine = new Engine();
-            double avg = engine.test();
-            String response = System.currentTimeMillis() + " ) This is the average : " + avg;
-            sendResponse(response, t);
-        }
+        engine.removeTweet("{\"id_str\":\"tweet12\",\"entities\":{\"hashtags\":[{\"text\":\"dogs\"},{\"text\":\"tiger\"}]}}");
+        System.out.println( "Removed tweet 12");
+        engine.calculateAverage();
+
+        engine.removeTweet("{\"id_str\":\"tweet1\",\"entities\":{\"hashtags\":[{\"text\":\"Gretel\"},{\"text\":\"data\"}]}}");
+        System.out.println( "Removed tweet 1");
+        engine.calculateAverage();
+
+    
+        engine.removeTweet("{\"id_str\":\"tweet7\",\"entities\":{\"hashtags\":[{\"text\":\"Gretel\"},{\"text\":\"data\"}]}}");
+        System.out.println( "Removed tweet 7");
+        engine.calculateAverage();
 
     }
 }
