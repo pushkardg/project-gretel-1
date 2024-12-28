@@ -15,17 +15,16 @@ public class DegreeCalculator {
 
     public DegreeCalculator() throws IOException {
         this.tweetReader = new TweetsFileReader();
-        graph = new TweetHashTagGraph();
+        this.graph = new TweetHashTagGraph();
+
         if( !tweetReader.checkIfFileExists(TWEET_FILE_PATH)){
             System.out.println( "The Tweet file does not exist at the path : " +TWEET_FILE_PATH+ ". Cannot continue...");
             throw new IOException("Tweet file does not exist : " +TWEET_FILE_PATH);
         }
+
+        //Read all the tweets and initialize the graph wih the tweet hash tags.
         List<TweetHashTag> hashTagsInAllTweets = tweetReader.getHashTagsInTweets(TWEET_FILE_PATH);
         graph.createGraph(hashTagsInAllTweets);
-    }
-
-    public double test() {
-        return calculateAverage();
     }
 
     public double calculateAverage() {
@@ -38,20 +37,16 @@ public class DegreeCalculator {
     public void addTweet(String tweet) {
         List<String> hashTags = tweetReader.extractHashTagsInTweetString(tweet);
         Optional<String> tweetId = tweetReader.extractTweetId(tweet);
-        if (!tweetId.isPresent()){
-            return;
-        }
-            
-        this.graph.addTweetToGraph(new TweetHashTag(tweetId.get(), hashTags));
+        if (tweetId.isPresent()){
+            this.graph.addTweetToGraph(new TweetHashTag(tweetId.get(), hashTags));
+        }        
     }
 
     public void removeTweet(String tweet) {
         List<String> hashTags = tweetReader.extractHashTagsInTweetString(tweet);
         Optional<String> tweetId = tweetReader.extractTweetId(tweet);
-        if (!tweetId.isPresent()){
-            return;
-        }
-
-        this.graph.removeTweetFromGraph(new TweetHashTag(tweetId.get(), hashTags));
+        if (tweetId.isPresent()){
+            this.graph.removeTweetFromGraph(new TweetHashTag(tweetId.get(), hashTags));
+        }        
     }
 }
