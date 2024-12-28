@@ -45,6 +45,9 @@ class TweetsFileReaderTest {
         Assert.assertEquals(hashTags, Collections.emptyList());
     }
 
+    /**
+     * This test case loads the entire tests1.txt file and extracts all the tweets in it.
+     */
     @Test
     void testExtractHashTagsInAllTweets() {
         TweetsFileReader tweetsReader = new TweetsFileReader();
