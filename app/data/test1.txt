@@ -1,0 +1,8 @@
+{"id_str":"tweet1","entities":{"hashtags":[{"text":"Gretel"},{"text":"data"}]}}
+{"id_str":"tweet2","entities":{"hashtags":[{"text":"data"},{"text":"startup"},{"text":"privacy"}]}}
+{"id_str":"tweet3","entities":{"hashtags":[{"text":"data"}]}}
+{"id_str":"tweet4","entities":{"hashtags":[{"text":"gretel"}]}}
+{"id_str":"tweet5","entities":{"hashtags":[{"text":"rocketship"},{"text":"Gretel"}]}}
+{"id_str":"tweet6","entities":{"hashtags":[{"text":"cats"},{"text":"cats"},{"text":"cats"}]}}
+{"id_str":"tweet7","entities":{"hashtags":[]}}
+{"id_str":"tweet8","entities":{"hashtags":[]}}
